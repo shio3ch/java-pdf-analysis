@@ -1,0 +1,66 @@
+# Java Gradle CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
+version: 2.1
+executors:
+  java-container:
+    docker:
+      - image: circleci/openjdk:11
+
+jobs:
+  build:
+    executor: java-container
+    working_directory: ~/repo
+    environment:
+      _JAVA_OPTIONS: "-Xmx3g"
+      GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - restore_cache:
+          key: v1-gradle-cache-{{ checksum "build.gradle" }}
+      - run:
+          name: Install dependencies
+          command: ./gradlew build -x test
+      - save_cache:
+          paths:
+            - ~/.gradle/wrapper
+          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - save_cache:
+          paths:
+            - ~/.gradle/caches
+          key: v1-gradle-cache-{{ checksum "build.gradle" }}
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+
+  test:
+    executor: java-container
+    working_directory: ~/repo
+    environment:
+      _JAVA_OPTIONS: "-Xmx3g"
+      GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: test-run
+          command:
+              echo "start test job.."
+              ./gradlew test
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+    - build
+    - test:
+        requires:
+          - build
+    # - deploy:
+    #     requires:
+    #       - test
