@@ -1,10 +1,10 @@
-package site.test.pdfanalysis.db.service;
+package site.shio3ch.panshopapp.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import site.test.pdfanalysis.db.entity.Users;
-import site.test.pdfanalysis.db.repository.UsersRepository;
+import site.shio3ch.panshopapp.domain.repository.UsersRepository;
+import site.shio3ch.panshopapp.domain.model.Users;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package site.test.pdfanalysis;
+package site.shio3ch.panshopapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

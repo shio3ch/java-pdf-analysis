@@ -1,4 +1,4 @@
-package site.test.pdfanalysis;
+package site.shio3ch.panshopapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
