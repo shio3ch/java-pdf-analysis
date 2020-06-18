@@ -1,13 +1,16 @@
-# Java PDF Analysis Application
+# Spring-Boot Web Application
 
-This project is analyse PDF file with Java.
+This project is study for Spring-Boot webapp.
+
+## Java version
+* Java 11
 
 ## Build
 * Gradle
 
 ## Framework
-* Spring
+* Spring-Boot
 
-## Use libraries
-* Apache PDFBox
-  - https://pdfbox.apache.org/
+## DB
+* Postgres
+
