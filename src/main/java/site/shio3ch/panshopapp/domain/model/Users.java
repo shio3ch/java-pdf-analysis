@@ -1,4 +1,4 @@
-package site.test.pdfanalysis.db.entity;
+package site.shio3ch.panshopapp.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
