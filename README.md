@@ -1,13 +1,28 @@
-# Java PDF Analysis Application
+# Spring-Boot Web Application
 
-This project is analyse PDF file with Java.
+This project is study for Spring-Boot webapp.
 
-## Build
+## Project overview
+### Java version
+* Java 11
+
+### Build
 * Gradle
 
-## Framework
-* Spring
+### Framework
+* Spring-Boot
 
-## Use libraries
-* Apache PDFBox
-  - https://pdfbox.apache.org/
+### DB
+* PostgresSQL
+
+## Start up
+### Make your local development environment
+Run the following command in your project directory.
+Run docker, And run local DB.
+```
+docker-compose up -d
+```
+Run java application.
+```
+gradlew bootRun
+```
