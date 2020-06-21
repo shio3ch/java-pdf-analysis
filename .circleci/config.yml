@@ -56,8 +56,9 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run: sudo apt-get update
-      - run: sudo apt-get install postgresql-client-9.6
+      - run: sudo rm -rf /var/lib/apt/lists/*
+      - run: sudo apt update
+      - run: sudo apt install postgresql-client-9.6
       - run:
           name: db-init
           command: |
@@ -66,8 +67,7 @@ jobs:
             -f "postgres/init.sql"
       - run:
           name: test-run
-          command:
-              echo "start test job.."
+          command: |
               ./gradlew test
 
 workflows:
