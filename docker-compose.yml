@@ -3,10 +3,10 @@ services:
   db:
     image: postgres
     ports:
-      - 5433:5432
+      - 5432:5432
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: pdfa
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     volumes:
       - ./postgres:/docker-entrypoint-initdb.d

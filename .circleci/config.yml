@@ -4,13 +4,22 @@
 #
 version: 2.1
 executors:
-  java-container:
+  build-container:
     docker:
       - image: circleci/openjdk:11
+  test-container:
+    docker:
+      - image: circleci/openjdk:11
+      - image: circleci/postgres:9.6.5-alpine-ram
+        environment:
+          TEST_DATABASE_URL:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+          POSTGRES_PASSWORD: postgres
 
 jobs:
   build:
-    executor: java-container
+    executor: build-container
     working_directory: ~/repo
     environment:
       _JAVA_OPTIONS: "-Xmx3g"
@@ -38,7 +47,7 @@ jobs:
             - build
 
   test:
-    executor: java-container
+    executor: test-container
     working_directory: ~/repo
     environment:
       _JAVA_OPTIONS: "-Xmx3g"
@@ -47,6 +56,14 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
+      - run: sudo apt-get update
+      - run: sudo apt-get install postgresql-client-9.6
+      - run:
+          name: db-init
+          command: |
+            psql \
+            -d "postgresql://postgres@localhost:5432/postgres" \
+            -f "postgres/init.sql"
       - run:
           name: test-run
           command:
