@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JavaPdfAnalysisApplication {
+public class JavaSpringBootWebapp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JavaPdfAnalysisApplication.class, args);
+		SpringApplication.run(JavaSpringBootWebapp.class, args);
 	}
 
 }
