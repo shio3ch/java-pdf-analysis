@@ -19,13 +19,17 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    // Use hotdeploy.
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     // PostgreSQL
     runtimeOnly 'org.postgresql:postgresql'
     // Lombok
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
     compileOnly 'org.projectlombok:lombok:1.18.12'
     // Thymeleaf
-    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // TODO: Upgrade version of Thymeleaf-layout-dialect. Because, console is output warn at startup.
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.4.1'
     // Webjars for Bootstrap
     compile 'org.webjars:bootstrap:4.5.0'
     compile 'org.webjars:webjars-locator:0.32'
@@ -34,4 +38,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+bootRun {
+    sourceResources sourceSets.main
 }
