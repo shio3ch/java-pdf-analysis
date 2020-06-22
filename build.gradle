@@ -19,10 +19,16 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    // PostgreSQL
     runtimeOnly 'org.postgresql:postgresql'
-    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-    annotationProcessor "org.projectlombok:lombok:1.18.12"
-    compileOnly "org.projectlombok:lombok:1.18.12"
+    // Lombok
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    // Thymeleaf
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // Webjars for Bootstrap
+    compile 'org.webjars:bootstrap:4.5.0'
+    compile 'org.webjars:webjars-locator:0.32'
 }
 
 
