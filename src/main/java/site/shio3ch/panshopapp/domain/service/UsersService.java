@@ -9,12 +9,12 @@ import site.shio3ch.panshopapp.domain.model.Users;
 import java.util.List;
 
 @Service
-@Transactional
 public class UsersService {
 
     @Autowired
     private UsersRepository usersRepository;
 
+    @Transactional
     public List<Users> getAllUsers() {
         return usersRepository.findAll();
     }

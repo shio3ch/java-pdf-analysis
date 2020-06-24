@@ -11,13 +11,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class DisplayImageControllerTest {
+public class DisplayControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    void displayImageへリクエストを投げたら200OKが返却される() throws Exception {
-        this.mockMvc.perform(get("/display-image").param("id","1")).andExpect(status().isOk());
+    void displayへリクエストを投げたら200OKが返却される() throws Exception {
+        this.mockMvc.perform(get("/display")).andExpect(status().isOk());
     }
+
 }

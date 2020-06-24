@@ -24,8 +24,10 @@ dependencies {
     // PostgreSQL
     runtimeOnly 'org.postgresql:postgresql'
     // Lombok
-    annotationProcessor 'org.projectlombok:lombok:1.18.12'
     compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
     // Thymeleaf
     // TODO: Upgrade version of Thymeleaf-layout-dialect. Because, console is output warn at startup.
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'

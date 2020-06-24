@@ -9,13 +9,13 @@ import site.shio3ch.panshopapp.domain.repository.ItemRepository;
 import java.util.List;
 
 @Service
-@Transactional
 public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ItemRepository itemRepository;
 
     @Override
+    @Transactional
     public List<Item> getAllItems() {
         return itemRepository.findAll();
     }

@@ -7,13 +7,13 @@ import site.shio3ch.panshopapp.domain.model.ItemImage;
 import site.shio3ch.panshopapp.domain.repository.ItemImageRepository;
 
 @Service
-@Transactional
 public class ItemImageServiceImpl implements ItemImageService {
 
     @Autowired
     private ItemImageRepository itemImageRepository;
 
     @Override
+    @Transactional
     public ItemImage getItemImage(int id) {
         return itemImageRepository.findById(id);
     }
