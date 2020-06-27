@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Hello, world!</title>
+    <title>SouthernCrossPanFactory</title>
+    <meta name="description" content="パン工場の商品一覧です。">
 </head>
 <body>
-    <div>
+<div layout:fragment="content">
+    <div class="container">
         <p>Hello, world!</p>
         <p th:each="user :${userList}">[[${user}]]</p>
-
     </div>
+</div>
 </body>
 </html>

@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300&display=swap');
+
+body {
+    font-family: 'M PLUS 1p', sans-serif;
+}
+
+.navbar-brand {
+    font-family: 'Sriracha', cursive;
+}
+
+.footer-content {
+    text-align: center;
+}
+
+.item-img {
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    animation: fadeIn 0.2s ease 0.3s 1 normal;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0}
+  100% {opacity: 1}
+
+}
