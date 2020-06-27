@@ -30,10 +30,10 @@ CREATE TABLE item_image (
     image bytea
 );
 
-INSERT
-    INTO item_image (id, image)
-    VALUES
-        ( 1, pg_read_binary_file('/docker-entrypoint-initdb.d/resources/anpan.png') ),
-        ( 2, pg_read_binary_file('/docker-entrypoint-initdb.d/resources/breadpan.png') ),
-        ( 3, pg_read_binary_file('/docker-entrypoint-initdb.d/resources/currypan.png') )
-;
+--INSERT
+--    INTO item_image (id, image)
+--    VALUES
+--        ( 1, pg_read_binary_file('/docker-entrypoint-initdb.d/resources/anpan.png') ),
+--        ( 2, pg_read_binary_file('/docker-entrypoint-initdb.d/resources/breadpan.png') ),
+--        ( 3, pg_read_binary_file('/docker-entrypoint-initdb.d/resources/currypan.png') )
+--;
