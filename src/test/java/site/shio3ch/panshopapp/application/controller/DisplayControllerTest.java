@@ -1,4 +1,4 @@
-package site.shio3ch.panshopapp.app.controller;
+package site.shio3ch.panshopapp.application.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,8 +8,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import site.shio3ch.panshopapp.domain.model.Item;
-import site.shio3ch.panshopapp.domain.service.ItemServiceImpl;
+import site.shio3ch.panshopapp.domain.model.item.Item;
+import site.shio3ch.panshopapp.domain.service.item.ItemService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +20,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class DisplayControllerTests {
+public class DisplayControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private ItemServiceImpl mockService;
+    private ItemService mockService;
 
-    private final static String REQUEST_URL = "/display";
+    private final static String REQUEST_URL = "/home";
 
     @BeforeEach
     void init() {
@@ -36,11 +36,10 @@ public class DisplayControllerTests {
     }
 
     @Test
-    void displayへリクエストを投げたら200OKが返却される() throws Exception {
+    void homeへリクエストを投げたら200OKが返却される() throws Exception {
         // モックServiceが返すテストデータを準備
         List<Item> itemList = new ArrayList<>();
         Item item = new Item();
-        item.setId(1);
         item.setName("testData");
         item.setIntroduction("testIntroduction");
         item.setContent("testContext");

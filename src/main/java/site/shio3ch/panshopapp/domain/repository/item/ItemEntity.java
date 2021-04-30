@@ -1,4 +1,4 @@
-package site.shio3ch.panshopapp.domain.model;
+package site.shio3ch.panshopapp.domain.repository.item;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "item")
-public class Item {
+public class ItemEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
