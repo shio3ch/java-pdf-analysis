@@ -3,26 +3,42 @@
 This project is study for Spring-Boot webapp.
 
 ## Project overview
+
 ### Java version
+
 * Java 11
 
-### Build
-* Gradle
-
 ### Framework
+
 * Spring-Boot
 
+### Build
+
+* Gradle
+
 ### DB
+
 * PostgresSQL
 
 ## Start up
+
 ### Make your local development environment
+
 Run the following command in your project directory.
-Run docker, And run local DB.
-```
+Run DB in docker.
+
+```shell
 docker-compose up -d
 ```
-Run java application.
+
+Initialize tables and records.
+
+```shell
+docker-compose run --rm flyway-migrate
 ```
+
+Run java application.
+
+```shell
 gradlew bootRun
 ```

@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.3.0.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id "org.flywaydb.flyway" version "7.8.2"
     id 'java'
 }
 
@@ -16,6 +17,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.session:spring-session-core'
+    implementation 'org.flywaydb:flyway-core'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
@@ -37,6 +39,12 @@ dependencies {
     compile 'org.webjars:webjars-locator:0.32'
 }
 
+flyway {
+    url = 'jdbc:postgresql://localhost:5432/springapp'
+    user = 'spap'
+    password = 'spap'
+    locations = ['classpath:db/migration/ddl', 'classpath:db/migration/dml']
+}
 
 test {
     useJUnitPlatform()
