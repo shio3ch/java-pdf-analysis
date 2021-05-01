@@ -43,17 +43,26 @@ dependencies {
     compile 'org.webjars:webjars-locator:0.32'
 }
 
-flyway {
-    url = 'jdbc:postgresql://localhost:5432/springapp'
-    user = 'spap'
-    password = 'spap'
-    locations = ['classpath:db/migration/ddl', 'classpath:db/migration/dml']
-}
-
 test {
     useJUnitPlatform()
 }
 
 bootRun {
     sourceResources sourceSets.main
+}
+
+flyway {
+    url = 'jdbc:postgresql://localhost:5432/springapp'
+    user = 'spap'
+    password = 'spap'
+    switch (project.properties['env']) {
+        case "product":
+            locations = ['classpath:db/migration/product']
+            break
+        case "devlopment":
+            locations = ['classpath:db/migration/product', 'classpath:db/migration/develop']
+            break
+        default:
+            locations = ['classpath:db/migration/product', 'classpath:db/migration/develop']
+    }
 }
