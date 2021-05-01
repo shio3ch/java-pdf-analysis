@@ -62,6 +62,9 @@ flyway {
         case "devlopment":
             locations = ['classpath:db/migration/product', 'classpath:db/migration/develop']
             break
+        case "test":
+            locations = ['classpath:db/migration/product', 'classpath:db/migration/develop']
+            break
         default:
             locations = ['classpath:db/migration/product', 'classpath:db/migration/develop']
     }

@@ -2,6 +2,8 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
+# local_test:
+#  circleci local execute --job test
 version: 2.1
 executors:
   build-container:
@@ -56,23 +58,18 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run:
-          name: postgresql-client install
-          command: |
-            sudo rm -rf /var/lib/apt/lists/*
-            sudo apt update
-            sudo apt install postgresql-client-11
+      # クライアントを使って初期化ファイルを流すのをやめた。見返した時に思い出すためにコメントアウトしておく
+      #      - run:
+      #          name: postgresql-client install
+      #          command: |
+      #            sudo rm -rf /var/lib/apt/lists/*
+      #            sudo apt update
+      #            sudo apt install postgresql-client
       - run:
           name: flyway migrate
           command: |
             ./gradlew flywayClean
-            ./gradlew flywayMigrate -Penv=develop
-      - run:
-          name: db-init
-          command: |
-            psql
-            -d "postgresql://postgres@localhost:5432/postgres"
-            -f "postgres/init.sql"
+            ./gradlew flywayMigrate -Penv=test
       - run:
           name: test-run
           command: |
