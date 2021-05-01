@@ -1,0 +1,1 @@
+INSERT INTO users (name) VALUES ('アンクルジャム'),('チルドバター'),('二足歩行犬');

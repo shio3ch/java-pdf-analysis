@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>SouthernCrossPanFactory - 商品</title>
+    <meta name="description" content="パン工場の商品一覧です。">
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <h2>商品</h2>
+        <div th:each="item :${itemList}" class="shadow-sm p-3 mb-5 bg-white rounded" id="item-list">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="item-image" th:item-id="${item.id}">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only text-center">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <h3 th:text="${item.name}"></h3>
+                    <p th:text="${item.introduction}"></p>
+                    <span class="float-right">
+                        <button type="button" class="btn btn-dark" data-toggle="modal"
+                                th:data-target="'.item-' + ${item.id}">もっと詳しく
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+            <div th:class="'modal fade bd-example-modal item-' + ${item.id}" tabindex="-1" role="dialog"
+                 aria-labelledby="hoge" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">商品の詳細</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h3 th:text="${item.name}"></h3>
+                            <p th:text="${item.content}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div layout:fragment="scripts">
+    <script type="text/javascript" src="/js/display.js"></script>
+</div>
+</body>
+</html>

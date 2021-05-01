@@ -2,6 +2,8 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
+# local_test:
+#  circleci local execute --job test
 version: 2.1
 executors:
   build-container:
@@ -10,12 +12,12 @@ executors:
   test-container:
     docker:
       - image: circleci/openjdk:11
-      - image: circleci/postgres:9.6.5-alpine-ram
+      - image: circleci/postgres:11-ram
         environment:
           TEST_DATABASE_URL:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: spap
+          POSTGRES_DB: springapp
+          POSTGRES_PASSWORD: spap
 
 jobs:
   build:
@@ -56,28 +58,31 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run: sudo rm -rf /var/lib/apt/lists/*
-      - run: sudo apt update
-      - run: sudo apt install postgresql-client-9.6
+      # クライアントを使って初期化ファイルを流すのをやめた。見返した時に思い出すためにコメントアウトしておく
+      #      - run:
+      #          name: postgresql-client install
+      #          command: |
+      #            sudo rm -rf /var/lib/apt/lists/*
+      #            sudo apt update
+      #            sudo apt install postgresql-client
       - run:
-          name: db-init
+          name: flyway migrate
           command: |
-            psql \
-            -d "postgresql://postgres@localhost:5432/postgres" \
-            -f "postgres/init.sql"
+            ./gradlew flywayClean
+            ./gradlew flywayMigrate -Penv=test
       - run:
           name: test-run
           command: |
-              ./gradlew test
+            ./gradlew test
 
 workflows:
   version: 2
   workflow:
     jobs:
-    - build
-    - test:
-        requires:
-          - build
+      - build
+      - test:
+          requires:
+            - build
     # - deploy:
     #     requires:
     #       - test

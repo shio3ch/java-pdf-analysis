@@ -1,12 +1,35 @@
 version: "3"
+
+x-template: &flyway-template
+  image: boxfuse/flyway:latest
+  volumes:
+    - ./:/flyway/conf
+    - ./src/main/resources/db/migration:/flyway/sql # 複数のディレクトリを同じボリュームにマウント出来ないので、db/migrationを指定している。
+  depends_on:
+    - db
+
 services:
+  flyway-clean:
+    <<: *flyway-template
+    command: clean
+
+  flyway-migrate:
+    <<: *flyway-template
+    command: migrate
+
+  flyway-migrate-product:
+    <<: *flyway-template
+    volumes:
+      - ./:/flyway/conf # sqlのみ指定したいところだが、 x-template の volumes 自体を上書きするのでconfも定義している。
+      - ./src/main/resources/db/migration/product:/flyway/sql
+    command: migrate
+
   db:
-    image: postgres
+    image: postgres:11
     ports:
       - 5432:5432
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
-    volumes:
-      - ./postgres:/docker-entrypoint-initdb.d
+      POSTGRES_USER: spap
+      POSTGRES_PASSWORD: spap
+      POSTGRES_DB: springapp
+    container_name: spring_app_db
